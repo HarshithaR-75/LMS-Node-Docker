@@ -1,0 +1,30 @@
+version: '3'
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:3000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: 'mysql'
+      DB_USER: 'root'
+      DB_PASSWORD: 'root123'
+      DB_DATABASE: 'lms'
+    networks:
+      - my-network
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root123'
+      MYSQL_DATABASE: 'lms'
+    volumes:
+      - ./lms.sql:/docker-entrypoint-initdb.d/lms.sql
+    networks:
+      - my-network
+
+networks:
+  my-network:
