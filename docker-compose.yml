@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
   node-app:
     build:
@@ -7,24 +7,25 @@ services:
     ports:
       - "8081:3000"
     depends_on:
-      - mysql
+      - mysql-container
     environment:
-      DB_HOST: 'mysql'
+      DB_HOST: 'mysql-container'  # Use the service name
+      DB_PORT: 6604               # The mapped port for MySQL container
       DB_USER: 'root'
       DB_PASSWORD: 'root123'
       DB_DATABASE: 'lms'
     networks:
       - my-network
 
-  mysql:
-    image: mysql:latest
+  mysql-container:
+    image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: 'root123'
-      MYSQL_DATABASE: 'lms'
-    volumes:
-      - ./lms.sql:/docker-entrypoint-initdb.d/lms.sql
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "6604:3306"  # Map host port 6604 to container port 3306
     networks:
       - my-network
+    command: ["--wait"]
 
 networks:
   my-network:

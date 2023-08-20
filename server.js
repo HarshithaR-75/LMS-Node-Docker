@@ -4,33 +4,35 @@ const mysql = require('mysql');
 const app = express();
 const port = 3000;
 
-// Database connection details
-const connection = mysql.createConnection({
-  host: 'mysql',  // Use the service name defined in docker-compose.yml
+// Database connection pool
+const pool = mysql.createPool({
+  host: 'mysql-container', // Use the service name of the MySQL container
+  port: 6604,               // The mapped port for MySQL container
   user: 'root',
   password: 'root123',
-  database: 'lms'
+  database: 'lms',
+  connectionLimit: 10      // Adjust this value based on your needs
 });
 
 
 
 // Create connection pool
- const pool = mysql.createPool({
-  host: 'mysql',  // Use the service name defined in docker-compose.yml
-  user: 'root',
-  password: 'root123',
-  database: 'lms'
- });
+//  const pool = mysql.createPool({
+//   host: 'mysql',  // Use the service name defined in docker-compose.yml
+//   user: 'root',
+//   password: 'root123',
+//   database: 'lms'
+//  });
 
 
 // Connect to the database
-connection.connect((error) => {
-  if (error) {
-    console.error('Connection failed:', error);
-    return;
-  }
-  console.log('Connected to the database!');
-});
+// connection.connect((error) => {
+//   if (error) {
+//     console.error('Connection failed:', error);
+//     return;
+//   }
+//   console.log('Connected to the database!');
+// });
 
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
@@ -49,7 +51,7 @@ app.post('/submit1', (req, res) => {
                VALUES ('${bookidinput}', '${booknameinput}', '${authorinput}', '${publicationinput}', '${branches}')`;
 
   // Execute the query
-  connection.query(sql1, (error, result) => {
+  pool.query(sql1, (error, result) => {
     if (error) {
       console.error('Error executing query:', error);
       res.status(500).send('Error adding record');
@@ -69,7 +71,7 @@ app.post('/submit2', (req, res) => {
     const sql1 = `DELETE FROM book_details WHERE Book_no = '${bookIdToDelete}'`;
   
     // Execute the query
-    connection.query(sql1, (error, result) => {
+    pool.query(sql1, (error, result) => {
       if (error) {
         console.error('Error executing query:', error);
         res.status(500).send('Error deleting record');
@@ -106,7 +108,7 @@ sql3 = sql3.slice(0, -2);
 sql3 += ` WHERE Book_no = '${bookid}'`;
 
     // Execute the query
-    connection.query(sql3, (error, result) => {
+    pool.query(sql3, (error, result) => {
       if (error) {
         console.error('Error executing query:', error);
         res.status(500).send('Error updating record');
@@ -125,7 +127,7 @@ app.post('/submit4', (req, res) => {
   // SQL query to insert the data
   const sql4 = `INSERT INTO borrower (Usn, Book_no, Issue_Date, Return_Date) VALUES ('${usn}', '${bookid}', '${issuedate}', '${returndate}')`;
     // Execute the query
-    connection.query(sql4, (error, result) => {
+    pool.query(sql4, (error, result) => {
       if (error) {
         console.error('Error executing query:', error);
         res.status(500).send('Error issuing book');
@@ -145,7 +147,7 @@ app.post('/submit5', (req, res) => {
     const sql5 = `UPDATE borrower SET Actual_return_date='${returndate}' WHERE Book_no='${bookid}' AND Usn='${usn}'`;
     
     // Execute the query
-    connection.query(sql5, (error, result) => {
+    pool.query(sql5, (error, result) => {
       if (error) {
         console.error('Error executing query:', error);
         res.status(500).send('Error in returning the book');
@@ -167,7 +169,7 @@ app.post('/submit6', (req, res) => {
 
 
   // Execute the query
-  connection.query(sql6, (error, result) => {
+  pool.query(sql6, (error, result) => {
     if (error) {
       console.error('Error executing query:', error);
       res.status(500).send('Error adding record');
@@ -186,7 +188,7 @@ app.post('/submit6', (req, res) => {
   
     // SQL query 
     const sql7 = `SELECT * FROM admin WHERE A_email = '${aemail}' AND A_password = '${apassword}'`;
-    connection.query(sql7, (error, result) => {
+    pool.query(sql7, (error, result) => {
       if (error) {
         console.error('Error querying the database:', error);
         res.status(500).send('Error querying the database');
@@ -210,7 +212,7 @@ app.post('/submit8', (req, res) => {
 
   // Query the database to check if the username and password are correct
   const sql8 = `SELECT * FROM student_details WHERE S_email = '${semail}' AND S_password = '${spassword}'`;
-  connection.query(sql8, (error, result) => {
+  pool.query(sql8, (error, result) => {
     if (error) {
       console.error('Error querying the database:', error);
       res.status(500).send('Error querying the database');
@@ -227,52 +229,6 @@ app.post('/submit8', (req, res) => {
     }
   });
 });
-
-// // Define a route to handle the request and generate the HTML table rows
-// app.get('/booksissued', (req, res) => {
-//   // SQL query to retrieve specific columns from the database
-//   const sql = `SELECT borrower.Book_no, book_details.Book_name, book_details.Author, book_details.Publication, borrower.Issue_Date, borrower.Return_Date
-//         FROM borrower
-//         INNER JOIN book_details ON borrower.Book_no = book_details.Book_no
-//         WHERE borrower.Actual_return_date IS NULL and Usn='1BM21CS075';`;
-
-//   // Execute the query
-//   pool.query(sql, (err, rows) => {
-//     if (err) {
-//       console.error('Error executing SQL query: ' + err.stack);
-//       return res.status(500).send('Internal Server Error');
-//     }
-
-//     // Check if the query returned any rows
-//     if (rows.length > 0) {
-//       let tableRows = '';
-
-//       // Generate the table rows dynamically
-//       rows.forEach((row) => {
-//         tableRows += `<tr>`;
-//         tableRows += `<td>${row.Book_no}</td>`;
-//         tableRows += `<td>${row.Book_name}</td>`;
-//         tableRows += `<td>${row.Author}</td>`;
-//         tableRows += `<td>${row.Publication}</td>`;
-//         tableRows += `<td>${row.Issue_Date}</td>`;
-//         tableRows += `<td>${row.Return_Date}</td>`;
-//         tableRows += `</tr>`;
-//       });
-
-//       // Read the existing HTML file
-//       const fs = require('fs');
-//       const htmlFile = fs.readFileSync('C:\Users\harsh\OneDrive\Desktop\LMS SEM 4 (with nodejs)\public\booksissued.html', 'utf8');
-
-//       // Inject the table rows into the HTML file
-//       const updatedHtmlFile = htmlFile.replace('  <!-- Table rows will be added dynamically with JavaScript -->', tableRows);
-
-//       // Send the updated HTML file as the response
-//       res.send(updatedHtmlFile);
-//     } else {
-//       res.send('No records found');
-//     }
-//   });
-// });
 
 
 app.get('/booksissued', (req, res) => {
