@@ -66,25 +66,31 @@
     <br><br>
    
     <h2 style="text-align: center;">Books Issued</h2><br>
-    <table>
+<table>
+  <tr>
+    <th>Book Number</th>
+    <th>Book Name</th>
+    <th>Author</th>
+    <th>Issue Date</th>
+    <th>Return Date</th>
+  </tr>
+  <% if (rows && rows.length > 0) { %>
+    <% rows.forEach((row) => { %>
       <tr>
-        <th>Book Number</th>
-        <th>Book Name</th>
-        <th>Author</th>
-        <th>Issue Date</th>
-        <th>Return Date</th>
+        <td><%= row.Book_no %></td>
+        <td><%= row.Book_name %></td>
+        <td><%= row.Author %></td>
+        <td><%= row.Issue_Date %></td>
+        <td><%= row.Return_Date %></td>
       </tr>
-      <% rows.forEach((row) => { %>
-          <tr>
-            <td><%= row.Book_no %></td>
-            <td><%= row.Book_name %></td>
-            <td><%= row.Author %></td>
-            <td><%= row.Issue_Date %></td>
-            <td><%= row.Return_Date %></td>
-          </tr>
-        <% }); %>
-      <!-- Table rows will be added dynamically with JavaScript -->
-    </table>
+    <% }); %>
+  <% } else { %>
+    <tr>
+      <td colspan="5">No books issued</td>
+    </tr>
+  <% } %>
+</table>
+
     <br/>
 
     <div class="foot"> 

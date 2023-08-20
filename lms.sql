@@ -109,6 +109,8 @@ values ("1BM21CS075", "CS0121" , '2023-03-01','2023-03-16','2023-03-07'),
         ("1BM21CS075", "CV0121" , '2023-03-01','2023-03-16','2023-03-21'),
         ("1BM21CS075", "CV0122" , '2023-03-01','2023-03-16','2023-03-22');  
         
+alter table borrower drop Late_fee;
+
 insert into BORROWER
 values ("1BM21CS075", "CS0121" , '2023-03-01','2023-03-16','2023-03-07'),
 		("1BM21CS075", "CS0122" , '2023-03-01','2023-03-16','2023-03-06'),
@@ -126,7 +128,7 @@ select * from book_details;
 select * from student_details;
 select * from borrower;
 
-alter table borrower drop Late_fee;
+
 delete from book_details where Book_no="ME106";
 delete from student_details where Usn="1BM21CS075";
 

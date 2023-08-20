@@ -14,6 +14,7 @@ services:
       DB_USER: 'root'
       DB_PASSWORD: 'root123'
       DB_DATABASE: 'lms'
+      WAIT_HOSTS: mysql-container:3306
     networks:
       - my-network
 
@@ -25,7 +26,8 @@ services:
       - "6604:3306"  # Map host port 6604 to container port 3306
     networks:
       - my-network
-    command: ["--wait"]
+    volumes:
+      - ./lms.sql:/docker-entrypoint-initdb.d/lms.sql
 
 networks:
   my-network:

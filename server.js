@@ -7,7 +7,7 @@ const port = 3000;
 // Database connection pool
 const pool = mysql.createPool({
   host: 'mysql-container', // Use the service name of the MySQL container
-  port: 6604,               // The mapped port for MySQL container
+  port: 3306,               // The mapped port for MySQL container
   user: 'root',
   password: 'root123',
   database: 'lms',
