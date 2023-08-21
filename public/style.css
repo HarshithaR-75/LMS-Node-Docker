@@ -702,11 +702,11 @@ background-color: rgb(249, 246, 219);
   }
 
   .boxrow1{
-    height: 100%;
+    height: 12%;
   }
 
   .box1{
-    width: 300px;
+    width: 100px;
     height: 130px;
     /* background-color: #7f8de4;
     background-image: linear-gradient(45deg, #7f8de4 0%, #c77cc2 46%, #f9d38e 100%); */
@@ -770,78 +770,52 @@ background-image: linear-gradient( 68.4deg,  rgba(99,251,215,1) -0.4%, rgba(5,22
     box-shadow: 5px 5px #0093E9;
   }
 
-  .box5{
-    width: 300px;
-    height: 130px;
-    /* background-color: #6793c7;
-background-image: linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%); */
-
-    /* background-color:rgb(222, 174, 16); */
-    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-    position: absolute;
-    top: 104%;
-    left: 37%;
-    padding: 40px;
-    box-sizing: border-box;
-    box-shadow:5px 5px #ce7af7;
+  .boxrow1 {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
   }
-  .box6{
-    width: 300px;
-    height: 130px;
-    /* background-color: #21D4FD;
-background-image: linear-gradient(19deg, #21D4FD 0%, #ce7af7 100%); */
-    /* background-color:rgb(232, 197, 81); */
-    background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-    position: absolute;
-    top: 104%;
-    left: 70%;
-    padding: 40px;
-    box-sizing: border-box;
-    box-shadow: 5px 5px #ec6f6f;
-  }
-
-  .socialicons{
-    position: relative;
-    bottom: 0%;
-  }
-
-  h2{
-    color: black;
-    margin: auto;
-    
-  }
-
-  h3{
-    color: black;
-    font-size: 25px;
-    /* padding: 30px 20px 10px 30px; */
-  }
-
-  .imageslide img{
-    height: 300px;
-  }
-
-  #booksissue th {
-padding: 12px;
-text-align: left;
-background-color:bisque;
-color: black;
-}
-
-#booksissue td{
-  padding: 12px;
-  background-color: rgb(239, 235, 235);
-  margin: 30px;
-}
-
-table{
   
-    width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
-    margin: 0 auto; /* Center the table on the page */
-    border-collapse: collapse; /* Remove spacing between cells */
-
-}
+  .boxrow2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .box1,
+  .box2,
+  .box3,
+  .box4 {
+    width: 300px;
+    height: 130px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 5px 5px #0093e9;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .box1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .box2 {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  }
+  
+  .box3 {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  }
+  
+  .box4 {
+    background: linear-gradient(135deg, #f45c43 0%, #eb3349 100%);
+  }
+  
 
 
 
