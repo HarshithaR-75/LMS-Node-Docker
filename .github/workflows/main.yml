@@ -19,6 +19,9 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Docker
+      uses: docker://lms-node-copy-node-app:latest
+
     - name: Install dependencies
       run: |
           npm install
