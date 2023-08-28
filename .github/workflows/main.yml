@@ -19,6 +19,12 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Build Docker image 
+      run: |
+          docker build -t lms-node-copy-nope-app/latest .
+      working-directory: ${{ github.workspace }}
+
+
     - name: Docker
       uses: docker://lms-node-copy-node-app:latest
 
