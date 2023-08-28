@@ -1,18 +1,18 @@
 const mysql = require('mysql');
-const express = require('express');
+const express = require('express');  
 
 const app = express();
 
 
 // Create a connection to the MySQL database
 const connection = mysql.createConnection({
-  host: 'mysql',      // MySQL database host (e.g., 'localhost')
+  host: '127.0.0.1',      // MySQL database host (e.g., 'localhost')
   user: 'root',  // MySQL database user
-  password: 'root123',  // MySQL database password
+  password: 'harshmysql',  // MySQL database password
   database: 'lms'   // MySQL database name
 });
 
-// Connect to the database
+//Connect to the database
 connection.connect((error) => {
   if (error) {
     console.error('Error connecting to the database: ', error);
@@ -40,3 +40,17 @@ connection.connect((error) => {
     });
   });
 });
+
+
+// var mysql = require('mysql');
+
+// var con = mysql.createConnection({
+//   host: "localhost",
+//   user: "yourusername",
+//   password: "yourpassword"
+// });
+
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
