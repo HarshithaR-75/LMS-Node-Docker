@@ -248,6 +248,7 @@ app.get('/booksissued', (req, res) => {
     }
 
      // Render the 'booksissued' template and pass the retrieved data to it
+     console.log(rows)
      res.render('booksissued', { rows });
   });
 });
