@@ -27,13 +27,7 @@ jobs:
       run: |
           npm install
 
-    - name: Build and test backend
-      run: |
-          cd server
-          # Add commands for building and testing backend here
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+   
 
     - name: Build and Push Docker Image
       env:
