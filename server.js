@@ -1,8 +1,11 @@
 const express = require('express');
 const mysql = require('mysql'); 
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 // Database connection pool
 const pool = mysql.createPool({
@@ -245,6 +248,7 @@ app.get('/booksissued', (req, res) => {
     }
 
      // Render the 'booksissued' template and pass the retrieved data to it
+     console.log(rows)
      res.render('booksissued', { rows });
   });
 });

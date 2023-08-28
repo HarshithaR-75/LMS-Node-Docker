@@ -1,0 +1,44 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Build Docker image 
+      run: |
+          docker build -t lms-node-copy-nope-app/latest .
+      working-directory: ${{ github.workspace }}
+
+    - name: Install dependencies
+      run: |
+          npm install
+
+   
+
+    - name: Build and Push Docker Image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker buildx create --use
+        docker buildx build --tag lms-node-copy-node-app:latest --platform linux/amd64,linux/arm64 -f Dockerfile .
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        docker push lms-node-copy-node-app:latest
+
+    - name: Run Docker image
+      run: |
+        docker run -d -p 8081:3000 lms-node-copy-node-app:latest
