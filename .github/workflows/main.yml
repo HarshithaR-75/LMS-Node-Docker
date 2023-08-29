@@ -51,4 +51,4 @@ jobs:
 
       - name: Run Docker image
         run: |
-          docker run -d -p 8081:3000 lms-node-copy-node-app:v1.0
+          docker run -d -p 8081:3000 harshithar21/lms-docker:v1.0
