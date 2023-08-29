@@ -37,16 +37,10 @@ jobs:
         docker build -t lms-node-copy-node-app:latest .
       working-directory: ${{ github.workspace }}
 
-    - name: Build and Push Docker Image
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+    - name: Push Docker image
       run: |
-        docker buildx create --use
-        docker buildx build --tag lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
-        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-        docker push lms-node-copy-node-app:latest
-        docker push lms-node-copy-node-app:v1.0
+          docker push harshithar21/lms-docker .
+      working-directory: ${{ github.workspace }}
     
     - name: Docker Compose
       run: docker-compose up -d
