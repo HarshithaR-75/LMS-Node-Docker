@@ -36,15 +36,13 @@ jobs:
 
       - name: Build Docker image 
         run: |
-          docker build -t lms-node-copy-node-app:latest .
+          docker build -t harshithar21/lms-docker:v1.0 .
         working-directory: ${{ github.workspace }}/app-files
 
-      - name: Build and Push Docker Image (v1.0)
+      - name: Push Docker image frontend
         run: |
-          docker buildx create --use
-          docker buildx build --tag harshithar21/lms-docker:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
           docker push harshithar21/lms-docker:v1.0
-        working-directory: ${{ github.workspace }}/app-files
+        working-directory: ${{ github.workspace }}/client
 
       - name: Docker Compose
         run: docker-compose up -d
