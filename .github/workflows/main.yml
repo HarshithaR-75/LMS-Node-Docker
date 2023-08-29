@@ -45,6 +45,12 @@ jobs:
     - name: Push Docker image
       run: |
           docker push harshithar21/lms-node-copy-node-app:v1.0
+
+    - name: Build and Push Docker Image (v1.0)
+      run: |
+            docker buildx create --use
+            docker buildx build --tag harshithar21/lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
+            docker push harshithar21/lms-node-copy-node-app:v1.0
         
       working-directory: ${{ github.workspace }}
     
