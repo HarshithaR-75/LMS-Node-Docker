@@ -28,7 +28,7 @@ jobs:
 
     - name: Build Docker image 
       run: |
-        docker build -t lms-node-copy-node-app/latest .
+        docker build -t lms-node-copy-node-app:latest .
       working-directory: ${{ github.workspace }}
 
     - name: Build and Push Docker Image
@@ -40,6 +40,7 @@ jobs:
         docker buildx build --tag lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker push lms-node-copy-node-app:latest
+        docker push lms-node-copy-node-app:v1.0
 
     - name: Docker Compose
       run: docker-compose up -d
@@ -47,7 +48,6 @@ jobs:
 
     - name: Pull Docker image
       run: docker pull harshithar21/lms-docker:v1.0
-    
 
     - name: Run Docker image
       run: |
