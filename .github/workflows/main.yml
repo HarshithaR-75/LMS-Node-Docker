@@ -37,7 +37,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker buildx create --use
-        docker buildx build --tag lms-node-copy-node-app:latest --platform linux/amd64,linux/arm64 -f Dockerfile .
+        docker buildx build --tag lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker push lms-node-copy-node-app:latest
 
@@ -51,4 +51,4 @@ jobs:
 
     - name: Run Docker image
       run: |
-        docker run -d -p 8081:3000 lms-node-copy-node-app:latest
+        docker run -d -p 8081:3000 lms-node-copy-node-app:v1.0
