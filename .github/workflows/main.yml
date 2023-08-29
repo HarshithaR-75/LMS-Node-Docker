@@ -40,7 +40,7 @@ jobs:
     - name: Build Docker image 
       run: |
         docker build -t lms-node-copy-node-app:latest .
-      working-directory: ${{ github.workspace }}/docker
+      working-directory: ${{ github.workspace }}
 
     - name: Push Docker image
       run: |
