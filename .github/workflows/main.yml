@@ -20,7 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd app-files
           npm install
 
       - name: Build and test 
@@ -39,7 +38,7 @@ jobs:
           docker build -t harshithar21/lms-docker:v1.0 .
         working-directory: ${{ github.workspace }}
 
-      - name: Push Docker image frontend
+      - name: Push Docker image 
         run: |
           docker push harshithar21/lms-docker:v1.0
         working-directory: ${{ github.workspace }}
