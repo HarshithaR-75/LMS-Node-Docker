@@ -10,57 +10,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: |
-        npm install
+      - name: Install dependencies
+        run: |
+          cd app-files
+          npm install
 
-    - name: Build and test 
-      run: |
-        npm run build
+      - name: Build and test 
+        run: |
+          cd app-files
+          npm run build
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v1
-      with:
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
           username: "${{ secrets.DOCKER_USERNAME }}"
-          password: "${{ secrets.DOCKER_PASSWORD }}"    
+          password: "${{ secrets.DOCKER_PASSWORD }}"
 
-    - name: List Docker Images
-      run: docker images
-      working-directory: ${{ github.workspace }}
-        
+      - name: Build Docker image 
+        run: |
+          docker build -t lms-node-copy-node-app:latest .
+        working-directory: ${{ github.workspace }}/app-files
 
-    - name: Build Docker image 
-      run: |
-        docker build -t lms-node-copy-node-app:latest .
-      working-directory: ${{ github.workspace }}
+      - name: Build and Push Docker Image (v1.0)
+        run: |
+          docker buildx create --use
+          docker buildx build --tag harshithar21/lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
+          docker push harshithar21/lms-node-copy-node-app:v1.0
+        working-directory: ${{ github.workspace }}/app-files
 
-    # - name: Push Docker image
-    #   run: |
-    #       docker push harshithar21/lms-node-copy-node-app:v1.0
+      - name: Docker Compose
+        run: docker-compose up -d
+        working-directory: ${{ github.workspace }}
 
-    - name: Build and Push Docker Image (v1.0)
-      run: |
-            docker buildx create --use
-            docker buildx build --tag harshithar21/lms-node-copy-node-app:v1.0 --platform linux/amd64,linux/arm64 -f Dockerfile .
-            docker push harshithar21/lms-node-copy-node-app:v1.0
-        
-      working-directory: ${{ github.workspace }}
-    
-    - name: Docker Compose
-      run: docker-compose up -d
-      working-directory: ${{ github.workspace }}
+      - name: Pull Docker image
+        run: docker pull harshithar21/lms-docker:v1.0
 
-    - name: Pull Docker image
-      run: docker pull harshithar21/lms-docker:v1.0
-
-    - name: Run Docker image
-      run: |
-        docker run -d -p 8081:3000 lms-node-copy-node-app:v1.0
+      - name: Run Docker image
+        run: |
+          docker run -d -p 8081:3000 lms-node-copy-node-app:v1.0
