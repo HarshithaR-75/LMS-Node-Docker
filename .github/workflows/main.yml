@@ -45,6 +45,8 @@ jobs:
       - name: Docker Compose
         run: docker-compose up -d
         working-directory: ${{ github.workspace }}
+        env:
+          PORT: 3000
 
       - name: Pull Docker image
         run: docker pull harshithar21/lms-docker:v1.0
