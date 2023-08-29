@@ -24,7 +24,6 @@ jobs:
 
       - name: Build and test 
         run: |
-          cd app-files
           npm run build
 
       - name: Log in to Docker Hub
