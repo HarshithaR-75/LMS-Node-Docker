@@ -32,10 +32,15 @@ jobs:
           username: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"    
 
+    - name: List Docker Images
+      run: docker images
+      working-directory: ${{ github.workspace }}
+        
+
     - name: Build Docker image 
       run: |
         docker build -t lms-node-copy-node-app:latest .
-      working-directory: ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}/docker
 
     - name: Push Docker image
       run: |
