@@ -39,7 +39,8 @@ jobs:
 
     - name: Push Docker image
       run: |
-          docker push harshithar21/lms-docker .
+          docker push harshithar21/lms-docker:latest
+          docker push harshithar21/lms-docker:v1.0
       working-directory: ${{ github.workspace }}
     
     - name: Docker Compose
