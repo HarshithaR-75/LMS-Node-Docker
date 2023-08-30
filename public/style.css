@@ -798,7 +798,7 @@ background-image: linear-gradient( 68.4deg,  rgba(99,251,215,1) -0.4%, rgba(5,22
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgb(255, 9, 230);
+    background: rgb(235, 184, 73);
     background: radial-gradient(circle, rgb(215, 177, 94) 0%, rgba(243,202,96,1) 100%);
   }
   
