@@ -42,15 +42,10 @@ jobs:
           docker push harshithar21/lms-docker:v1.0
         working-directory: ${{ github.workspace }}
 
-      - name: Docker Compose
-        run: docker-compose up -d
-        working-directory: ${{ github.workspace }}
+      - name: Deploy to Docker Hub
+        run: |
+         docker pull harshithar21/lms-docker:v1.0
+         docker-compose up -d
+         working-directory: ${{ github.workspace }}
         env:
           PORT: 3000
-
-      - name: Pull Docker image
-        run: docker pull harshithar21/lms-docker:v1.0
-
-      - name: Run Docker image
-        run: |
-          docker run -d -p 8083:3000 harshithar21/lms-docker:v1.0
