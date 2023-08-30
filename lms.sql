@@ -134,5 +134,5 @@ delete from student_details where Usn="1BM21CS075";
 
 drop table admin;
 
-show databases;
+
 
