@@ -29,7 +29,7 @@ create table book_details
   Issue_Date date,
   Return_Date date,
   Actual_return_date date,
-  
+  Late_fee int,
   primary key(Usn,Book_no),
   foreign key (Usn) references student_details(Usn),
   foreign key (Book_no) references book_details(Book_no)
@@ -67,15 +67,12 @@ values ("1BM21CS001","harsh","CSE", "9876835467","harsh.cs21@bmsce.ac.in","harsh
 		("1BM21EC002","khush","ECE", "9876835478","khush.ece21@bmsce.ac.in","khush_1"),
         ("1BM21IS003","dev","ISE", "9876833467","dev.ise21@bmsce.ac.in","dev_1"),
         ("1BM21EN004","himanshu","ENI", "7886835467","himanshu.eni21@bmsce.ac.in","himanshu_1"),
-        ("1BM21ME005","neerja","MECH", "9876835467","neerja.mec21@bmsce.ac.in","neerja_1"),
-         ("1BM21CS075","harshitha","CSE", "9876835462","harshitha.cs21@bmsce.ac.in","harshi_1"),
-          ("1BM21CS076","ibrahim","CSE", "9876835434","ibrahim.cs21@bmsce.ac.in","ibu_1");
-
+        ("1BM21ME005","neerja","MECH", "9876835467","neerja.mec21@bmsce.ac.in","neerja_1");
         
 insert into borrower
-values ("1BM21IS003", "CS0101" , '2023-03-01','2023-03-16','2023-03-15'),
-		("1BM21EN004", "CS0103" , '2023-03-01','2023-03-17','2023-03-15'),
-        ("1BM21ME005", "CS0102" , '2023-03-01','2023-03-10','2023-03-15');
+values ("1BM21IS003", "CS0101" , '2023-03-01','2023-03-16','2023-03-15', 2),
+		("1BM21EN004", "CS0103" , '2023-03-01','2023-03-17','2023-03-15', 4),
+        ("1BM21ME005", "CS0102" , '2023-03-01','2023-03-10','2023-03-15', 0);
        
 insert into admin
 values ("kayal.cse@bmsce.ac.in" , "kayal_1"),
@@ -83,7 +80,7 @@ values ("kayal.cse@bmsce.ac.in" , "kayal_1"),
         ("manjunath.cse@bmsce.ac.in" , "manjunath_1"),
         ("namratha.cse@bmsce.ac.in" , "namratha_1");
         
-insert into book_details
+insert into BOOK_DETAILS
 values ( "CS0121","Software Engineering","R Sudha", "ARS Publications" ,"CSE"),
 	   ( "CS0122","Modern Operating Systems","Andrew S Tanenbaum", "Prentice Hall" ,"CSE"),
        ( "CS0123","Introduction to Automata Theory","John Hopcroft", "Pearson" ,"CSE"),
@@ -101,7 +98,7 @@ values ( "CS0121","Software Engineering","R Sudha", "ARS Publications" ,"CSE"),
        
 
 
-insert into borrower
+insert into BORROWER
 values ("1BM21CS075", "CS0121" , '2023-03-01','2023-03-16','2023-03-07'),
 		("1BM21CS075", "CS0122" , '2023-03-01','2023-03-16','2023-03-06'),
         ("1BM21CS075", "CS0123" , '2023-03-01','2023-03-16','2023-03-14'),
@@ -114,7 +111,7 @@ values ("1BM21CS075", "CS0121" , '2023-03-01','2023-03-16','2023-03-07'),
         
 alter table borrower drop Late_fee;
 
-insert into borrower
+insert into BORROWER
 values ("1BM21CS075", "CS0121" , '2023-03-01','2023-03-16','2023-03-07'),
 		("1BM21CS075", "CS0122" , '2023-03-01','2023-03-16','2023-03-06'),
         ("1BM21CS075", "CS0123" , '2023-03-01','2023-03-16','2023-03-14'),
@@ -137,5 +134,5 @@ delete from student_details where Usn="1BM21CS075";
 
 drop table admin;
 
-show databases;
+
 
