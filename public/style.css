@@ -600,7 +600,7 @@ footer .social_icons li a:hover{
 } 
 
 h2 {
-    color:Green;
+    color:#131111;
 }
 div.scrollbar {
     margin:4px, 4px;
@@ -713,8 +713,8 @@ background-color: rgb(249, 246, 219);
     background-color:rgb(191, 156, 41);
     background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
     position: absolute;
-    top: 77%;
-    left: 5%;
+    top: 84%;
+    left: 24%;
     padding: 40px;
     box-sizing: border-box;
     box-shadow:5px 5px #ec6f6f;
@@ -728,8 +728,8 @@ background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
 /* background-color:rgb(222, 174, 16); */
 background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     position: absolute;
-    top: 77%;
-    left: 37%;
+    top: 80%;
+    left: 56%;
     color: black;
     padding: 40px;
     box-sizing: border-box;
@@ -745,8 +745,8 @@ background-image: linear-gradient(147deg, #FFE53B 0%, #ec6f6f 74%); */
     /* background-color:rgb(232, 197, 81); */
     background-image: linear-gradient(to right, #6fe4cf 0%, #b0bae8 100%);
     position: absolute;
-    top: 77%;
-    left: 70%;
+    top: 105%;
+    left: 56%;
     padding: 40px;
     box-sizing: border-box;
     box-shadow: 5px 5px #00f2fe;
@@ -763,8 +763,8 @@ background-image: linear-gradient(45deg, #FEE140 0%, #f57da2 100%); */
 
 background-image: linear-gradient( 68.4deg,  rgba(99,251,215,1) -0.4%, rgba(5,222,250,1) 100.2% );
     position: absolute;
-    top: 104%;
-    left: 5%;
+    top: 105%;
+    left: 24%;
     padding: 40px;
     box-sizing: border-box;
     box-shadow: 5px 5px #0093E9;
