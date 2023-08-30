@@ -6,15 +6,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:3000"
-    depends_on:
-      - mysql-container
+    
     environment:
-      DB_HOST: 'mysql-container'  # Use the service name
+      DB_HOST: 'lexical-script-397417:us-central1:mysql--lms'  # Use the service name
       DB_PORT: 6604               # The mapped port for MySQL container
       DB_USER: 'root'
       DB_PASSWORD: 'root123'
       DB_DATABASE: 'lms'
-      WAIT_HOSTS: mysql-container:3306
+      
     networks:
       - my-network
 
