@@ -9,14 +9,13 @@ app.use(cors());
 
 // Database connection pool
 const pool = mysql.createPool({
-  host: 'mysql-container', // Use the service name of the MySQL container
-  port: 3306,               // The mapped port for MySQL container
+  host: '34.71.134.65', // Replace with the IP address of your Google Cloud MySQL instance
+  port: 3306,           // The MySQL port (usually 3306)
   user: 'root',
   password: 'root123',
   database: 'lms',
-  connectionLimit: 10      // Adjust this value based on your needs
+  connectionLimit: 10   // Adjust this value based on your needs
 });
-
 
 
 // Create connection pool
