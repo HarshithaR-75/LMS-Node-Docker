@@ -14,6 +14,7 @@ services:
       DB_PASSWORD: 'root123'
       DB_DATABASE: 'lms'
       
+      
     networks:
       - my-network
 
