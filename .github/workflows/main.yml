@@ -32,6 +32,12 @@ jobs:
           username: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"
 
+      - name: Build Docker image 
+        run: |
+            docker build -t harshithar21/lms-docker:v1.0 .
+        working-directory: ${{ github.workspace }}
+  
+
       - name: Push Docker image 
         run: |
           docker push harshithar21/lms-docker:v1.0
