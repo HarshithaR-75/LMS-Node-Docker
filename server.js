@@ -18,25 +18,6 @@ const pool = mysql.createPool({
 });
 
 
-// Create connection pool
-//  const pool = mysql.createPool({
-//   host: 'mysql',  // Use the service name defined in docker-compose.yml
-//   user: 'root',
-//   password: 'root123',
-//   database: 'lms'
-//  });
-
-
-// Connect to the database
-// connection.connect((error) => {
-//   if (error) {
-//     console.error('Connection failed:', error);
-//     return;
-//   }
-//   console.log('Connected to the database!');
-// });
-
-// Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
@@ -177,7 +158,7 @@ app.post('/submit6', (req, res) => {
       res.status(500).send('Error adding record');
     } else {
       console.log('Record added successfully');
-      res.redirect("update.html");
+      res.redirect("logintry.html");
     }
   });
 });
